@@ -11,4 +11,8 @@ class CounterModel: ObservableObject {
     func decrement() {
         count -= 1
     }
+    
+    func reset() {
+        count = 0
+    }
 } 

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CounterView: View {
     @StateObject private var counterModel = CounterModel()
+    @ObservedObject var userManager: UserManager
     
     // Custom colors
     private let backgroundColor = Color(red: 0.95, green: 0.93, blue: 1.0) // Light lavender
@@ -13,6 +14,15 @@ struct CounterView: View {
             backgroundColor.ignoresSafeArea()
             
             VStack(spacing: 40) {
+                HStack {
+                    Spacer()
+                    Button(action: { userManager.logout() }) {
+                        Text("Logout")
+                            .foregroundColor(accentColor)
+                    }
+                    .padding()
+                }
+                
                 // Title
                 Text("Counter")
                     .font(.system(size: 42, weight: .light))
@@ -27,10 +37,16 @@ struct CounterView: View {
                 Spacer()
                 
                 // Buttons
-                HStack(spacing: 60) {
+                HStack(spacing: 40) {
                     CounterButton(
                         action: counterModel.decrement,
                         symbol: "minus.circle.fill",
+                        color: accentColor
+                    )
+                    
+                    CounterButton(
+                        action: counterModel.reset,
+                        symbol: "arrow.counterclockwise.circle.fill",
                         color: accentColor
                     )
                     
@@ -47,5 +63,5 @@ struct CounterView: View {
 }
 
 #Preview {
-    CounterView()
+    CounterView(userManager: UserManager())
 } 

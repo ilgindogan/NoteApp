@@ -9,10 +9,15 @@ import SwiftUI
 
 @main
 struct NoteAppApp: App {
+    @StateObject private var userManager = UserManager.shared
+    
     var body: some Scene {
         WindowGroup {
-            CounterView()
-                .preferredColorScheme(.dark)
+            if userManager.isAuthenticated {
+                CounterView(userManager: userManager)
+            } else {
+                LoginView()
+            }
         }
     }
 }
