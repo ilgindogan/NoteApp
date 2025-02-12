@@ -11,7 +11,8 @@ import SwiftUI
 struct NoteAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CounterView()
+                .preferredColorScheme(.dark)
         }
     }
 }
